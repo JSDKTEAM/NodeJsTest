@@ -1,0 +1,68 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: node-deployment1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: node-deployment1
+  template:
+    metadata:
+      labels:
+        app: node-deployment1
+    spec:
+      containers:
+        - name: node-deployment1
+          image: proxy1_proxytest1
+          ports:
+            - containerPort: 3000
+          imagePullPolicy: Never
+          command: ["/bin/sh"]
+          args: ["./entrypoint.sh"]                                                 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodejs-service1
+  labels:
+    app: node-deployment1
+spec:
+  ports:
+  - port: 3000
+    targetPort: 3000
+    protocol: TCP
+  selector:
+    app: node-deployment1
+  type: LoadBalancer
+
+
+# apiVersion: extensions/v1beta1
+# kind: Deployment
+# metadata:
+#   name: whoami-deployment
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: whoami
+#   template:
+#     metadata:
+#       labels:
+#         app: whoami
+#     spec:
+#       containers:
+#       - name: whoami-container
+#         image: containous/whoami
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: whoami-service
+# spec:
+#   ports:
+#   - name: http
+#     targetPort: 80
+#     port: 80
+#   selector:
+#     app: whoami

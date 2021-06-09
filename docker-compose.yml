@@ -1,0 +1,10 @@
+version: '3'
+services: 
+  proxytest1:
+      build: ./
+      ports:
+        - 3000:3000
+      environment:
+        port: 3000
+      restart: always
+      entrypoint: ["/bin/bash","./entrypoint.sh"]
