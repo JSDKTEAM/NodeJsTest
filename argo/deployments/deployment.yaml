@@ -2,6 +2,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: node-deployment1
+  namespace: nodetest
 spec:
   replicas: 2
   selector:
@@ -24,6 +25,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: nodetest
   name: nodejs-service1
   labels:
     app: node-deployment1
