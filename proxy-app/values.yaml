@@ -1,0 +1,6 @@
+deployment:
+  image: "proxy-app"
+  tag : "latest"
+  containerPort : 3000
+name: proxy-app
+port : 3000
