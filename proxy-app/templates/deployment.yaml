@@ -25,22 +25,7 @@ spec:
             - containerPort: "{{ .Values.deployment.containerPort }}"
           imagePullPolicy: Always
           command: ["npm","run","dev"]                                               
----
-apiVersion: v1
-kind: Service
-metadata:
-  namespace: app
-  name: "{{ .Values.name }}"-service
-  labels:
-    app: "{{ .Values.name }}"
-spec:
-  ports:
-  - port: "{{ .Values.port }}"
-    targetPort: "{{ .Values.deployment.containerPort }}"
-    protocol: TCP
-  selector:
-    app: "{{ .Values.name }}"
-  type: LoadBalancer
+
 
 
 # apiVersion: extensions/v1beta1
